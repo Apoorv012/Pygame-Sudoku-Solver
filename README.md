@@ -1,2 +1,2 @@
 # Pygame-Sudoku-Solver
-## Using Pygame to visualize Sudoku, and planning to solve it.
+Using Pygame to visualize Sudoku, and planning to solve it.
