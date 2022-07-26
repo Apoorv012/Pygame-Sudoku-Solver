@@ -1,12 +1,20 @@
 # Import Modules
 import pygame
+from pygame import Vector2
 
 # Constants
 DIMENSION = 9
-CELL_SIZE = 80
+CELL_SIZE = 60
 
 # Colors
 WHITE = [255, 255, 255]
+BLACK = [0, 0, 0]
+
+
+def draw_thick_line(pos1: Vector2, pos2: Vector2, window: pygame.surface.Surface, thickness: Vector2):
+    points = [pos1 + thickness, pos2 + thickness, pos2 - thickness, pos1 - thickness]
+    pygame.draw.polygon(window, BLACK, points)
+
 
 # Main Game Class
 class Game:
@@ -18,6 +26,20 @@ class Game:
 
     def display(self):
         self.window.fill(WHITE)
+
+        for row in range(1, DIMENSION):
+            if row % 3:
+                pygame.draw.line(self.window, BLACK, Vector2(0, row * CELL_SIZE), \
+                    Vector2(DIMENSION * CELL_SIZE, row * CELL_SIZE))
+            else:
+                draw_thick_line(Vector2(0, row * CELL_SIZE), Vector2(DIMENSION * CELL_SIZE, row * CELL_SIZE), self.window, Vector2(0, 3))
+        
+        for col in range(1, DIMENSION):
+            if col % 3:
+                pygame.draw.line(self.window, BLACK, Vector2(col * CELL_SIZE, 0), \
+                    Vector2(col * CELL_SIZE, DIMENSION * CELL_SIZE))
+            else:
+                draw_thick_line(Vector2(col * CELL_SIZE, 0), Vector2(col * CELL_SIZE, DIMENSION * CELL_SIZE), self.window, Vector2(3, 0))
 
         pygame.display.update()
 
